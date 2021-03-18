@@ -19,7 +19,7 @@ pipeline{
 				  steps
 					  {
 					   sh "mvn clean package"
-					  // sh "mv target/*.war target/myweb.war"
+					   sh "mv target/*.war target/myweb.war"
 					  }
 				 }
 				 stage("Deploy-dev")
@@ -28,15 +28,13 @@ pipeline{
 						{
 						 sshagent(['Tomcat'])
 							{
-								// scp -o StrictHostKeyChecking=no target/myweb.war ubuntu@172.31.9.46:/opt/tomcat/webapps/
-								
-								// ssh ubuntu@172.31.9.46 /opt/tomcat/bin/shutdown.sh
-						
-								// ssh ubuntu@172.31.9.46 /opt/tomcat/bin/startup.sh
-								
 								sh """
 							
-									scp -o StrictHostKeyChecking=no ubuntu@172.31.9.46:/opt/tomcat/webapps/
+									scp -o StrictHostKeyChecking=no target/myweb.war ubuntu@172.31.9.46:/opt/tomcat/webapps/
+								
+									ssh ubuntu@172.31.9.46 /opt/tomcat/bin/shutdown.sh
+						
+									ssh ubuntu@172.31.9.46 /opt/tomcat/bin/startup.sh
 					
 								"""
 							}
