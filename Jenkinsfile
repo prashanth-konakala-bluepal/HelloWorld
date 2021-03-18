@@ -1,34 +1,19 @@
-pipeline {
-		  agent any
-		  environment
-					 {
-					  PATH = "/opt/apache-maven-3.6.3/bin:$PATH"
-					 }
-		  stages
-				{
-				 stage("clone code")
+pipeline{
+		 agent any
+		 stages{
+			    stage("Git Checkout")
 					{
 					 steps
 						  {
-						   echo 'Cloneing Done'
+						   git branch: 'main', url: 'https://github.com/prashanth-konakala-bluepal/HelloWorld.git'
 						  }
 					}
-				stage("build code")
-					{
-					 steps
-						  {
-						   echo "Building Code"
-						  }
-					}
-				stage("deploy")
-					{
-					 steps
-						  {
-						   sshagent(['deploy_ubuntu']) 
-						   {
-						   sh "scp -o StrictHostKeyChecking=no webapp/target/webapp.war ubuntu@3.16.137.122:/opt/tomcat/webapps"
-						   }
-						  }
-					}
-				}
-		 }
+			     stage("Maven Build")
+				 {
+				  step
+					  {
+					   sh "mvn clean package"
+					  }
+				 }
+			   }
+		}
