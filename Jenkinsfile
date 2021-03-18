@@ -20,7 +20,7 @@ pipeline{
 					  {
 					   sh "mvn package"
 					   // sh "${mvnHome}/bin/mvn package"
-					   sh "mv /var/lib/jenkins/workspace/sample_pipeline/webapp/target/*.war target/simpleweb.war"
+					   sh "mv /var/lib/jenkins/workspace/sample_pipeline/webapp/target/*.war /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war"
 					  }
 				 }
 				 stage("Deploy-dev")
