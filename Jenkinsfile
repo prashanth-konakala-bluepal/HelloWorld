@@ -19,7 +19,7 @@ pipeline{
 				  steps
 					  {
 					   sh "mvn clean package"
-					   sh "mv /var/lib/jenkins/workspace/sample_pipeline/webapp/target/*.war target/myweb.war"
+					   // sh "mv /var/lib/jenkins/workspace/sample_pipeline/webapp/target/*.war target/myweb.war"
 					  }
 				 }
 				 stage("Deploy-dev")
@@ -30,7 +30,7 @@ pipeline{
 							{
 								sh """
 							
-									scp -o StrictHostKeyChecking=no target/myweb.war ubuntu@172.31.9.46:/opt/tomcat/webapps/
+									scp -o StrictHostKeyChecking=no target/*.war ubuntu@172.31.9.46:/opt/tomcat/webapps/
 								
 									ssh ubuntu@172.31.9.46 /opt/tomcat/bin/shutdown.sh
 						
