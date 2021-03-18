@@ -20,7 +20,7 @@ pipeline{
 					  {
 					   sh "mvn package"
 					   // sh "${mvnHome}/bin/mvn package"
-					   // sh "mv /var/lib/jenkins/workspace/sample_pipeline/webapp/target/*.war target/simpleweb.war"
+					   sh "mv /var/lib/jenkins/workspace/sample_pipeline/webapp/target/*.war target/simpleweb.war"
 					  }
 				 }
 				 stage("Deploy-dev")
@@ -29,7 +29,7 @@ pipeline{
 						{
 						 sshagent(['Tomcat'])
 							{
-								sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/myweb.war ubuntu@3.141.201.230:/opt/tomcat/webapps/'
+								sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@3.141.201.230:/opt/tomcat/webapps/'
 								sh 'ssh ubuntu@3.141.201.230 /opt/tomcat/bin/shutdown.sh'
 								sh 'ssh ubuntu@3.141.201.230 /opt/tomcat/bin/startup.sh'
 							}
