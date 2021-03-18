@@ -18,8 +18,8 @@ pipeline{
 				 {
 				  steps
 					  {
-					   sh "mvn clean package"
-					   sh "${mvnHome}/bin/mvn package"
+					   sh "mvn package"
+					   // sh "${mvnHome}/bin/mvn package"
 					   // sh "mv /var/lib/jenkins/workspace/sample_pipeline/webapp/target/*.war target/simpleweb.war"
 					  }
 				 }
