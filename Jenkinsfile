@@ -6,6 +6,10 @@ pipeline{
 		  PATH = "/opt/apache-maven-3.6.3/bin:$PATH"
 		 }
 		 
+		 {
+		  PATH = "/opt/jdk-11.0.10/bin:$PATH"
+		 }
+		 
 		 stages{
 			    stage("Git Checkout")
 					{
@@ -51,6 +55,9 @@ pipeline{
 							scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@18.220.90.224:/opt/tomcat/webapps/
 							
 							ssh ubuntu@18.220.90.224 /opt/tomcat/bin/shutdown.sh
+							
+							ssh ubuntu@18.220.90.224 /opt/tomcat/bin/startup.sh
+						  
 						  """
 						 }
 						}
