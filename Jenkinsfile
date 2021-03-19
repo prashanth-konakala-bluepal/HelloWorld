@@ -32,9 +32,9 @@ pipeline{
 							 
 								scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@172.31.9.46:/opt/tomcat/webapps/
 								
-								ssh ubuntu@172.31.9.46 /opt/tomcat/bin/shutdown.sh'
+								ssh ubuntu@172.31.9.46 /opt/tomcat/bin/shutdown.sh
 								
-								ssh ubuntu@172.31.9.46 /opt/tomcat/bin/startup.sh'
+								ssh ubuntu@172.31.9.46 /opt/tomcat/bin/startup.sh
 								
 							 """
 							}
