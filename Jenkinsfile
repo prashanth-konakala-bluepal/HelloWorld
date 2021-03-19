@@ -49,11 +49,7 @@ pipeline{
 						  sh """
 						  
 							scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@18.220.90.224:/opt/tomcat/webapps/
-							
-							ssh ubuntu@18.220.90.224 /opt/tomcat/bin/shutdown.sh
-							
-							ssh ubuntu@18.220.90.224 /opt/tomcat/bin/startup.sh
-						  
+											  
 						  """
 						 }
 						}
