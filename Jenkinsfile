@@ -4,6 +4,9 @@ pipeline{
 		 environment
 		 {
 		  PATH = "/opt/apache-maven-3.6.3/bin:$PATH"
+		 }
+		 
+		 {
 		  PATH = "/opt/tomcat/bin:$PATH"
 		 }
 		 
