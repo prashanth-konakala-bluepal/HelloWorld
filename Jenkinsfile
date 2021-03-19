@@ -40,5 +40,23 @@ pipeline{
 							}
 						}
 				 }
+				 stage("Deploy-test")
+				 {
+				  steps
+						{
+						 sshagent(['Tomcat-2'])
+						 {
+						  sh """
+						  
+							scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@172.31.2.146:/opt/tomcat/webapps/
+							
+							ssh ubuntu@172.31.2.146 /opt/tomcat/bin/shutdown.sh
+							
+							ssh ubuntu@172.31.2.146 /opt/tomcat/bin/startup.sh
+						  
+						  """
+						 }
+						}
+				 }
 			   }
 		}
