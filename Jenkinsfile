@@ -7,7 +7,7 @@ pipeline{
 		 }
 		 
 		 {
-		  PATH = "/opt/tomcat/bin:$PATH"
+		  PATH = "/opt/jdk-11.0.10/bin:$PATH"
 		 }
 		 
 		 stages{
