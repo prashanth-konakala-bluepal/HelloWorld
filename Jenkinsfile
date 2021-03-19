@@ -19,7 +19,6 @@ pipeline{
 				  steps
 					  {
 					   sh "mvn clean package"
-					   // sh "${mvnHome}/bin/mvn package"
 					   sh "mv /var/lib/jenkins/workspace/sample_pipeline/webapp/target/*.war /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war"
 					  }
 				 }
@@ -29,9 +28,15 @@ pipeline{
 						{
 						 sshagent(['Tomcat'])
 							{
-								sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@3.141.201.230:/opt/tomcat/webapps/'
-								sh 'ssh ubuntu@3.141.201.230 /opt/tomcat/bin/shutdown.sh'
-								sh 'ssh ubuntu@3.141.201.230 /opt/tomcat/bin/startup.sh'
+							 sh """
+							 
+								scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@172.31.9.46:/opt/tomcat/webapps/
+								
+								ssh ubuntu@172.31.9.46 /opt/tomcat/bin/shutdown.sh'
+								
+								ssh ubuntu@172.31.9.46 /opt/tomcat/bin/startup.sh'
+								
+							 """
 							}
 						}
 				 }
