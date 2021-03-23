@@ -32,23 +32,11 @@ pipeline{
 									{
 									script {
 											CHOICES = ["Deploy to Dev", "Deploy to Test"];    
-											env.YourTag = input  message: 'What are we deploying today?',ok : 'Deploy',id :'tag_id',
+											env.YourTag = input  message: 'Where to Deploy.?',ok : 'Deploy',id :'tag_id',
 															parameters:[choice(choices: CHOICES, description: 'Select a tag for this build', name: 'TAG')]
 											}           
 									echo "Deploying ${env.YourTag}"
 									}
-							 //		{
-								//	 input 
-									//			{
-										//		 parameters 
-											//		{
-												//	 choice(
-													//		choices: ['Deploy to Dev' , 'Deploy to Test'],
-														//	description: 'Where to Deploy.?',
-														//	name: 'REQUESTED_ACTION')
-												//	}
-											//	}
-								//	}
 							}				
 						stage('Deploy to Dev')
 							{
