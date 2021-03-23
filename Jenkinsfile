@@ -30,7 +30,7 @@ pipeline{
 							{
 							 steps
 									{
-									 parameters 
+									 // parameters 
 										{
 											choice(
 													choices: ['Deploy to Dev' , 'Deploy to Test'],
