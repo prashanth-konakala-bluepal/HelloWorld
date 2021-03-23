@@ -32,10 +32,11 @@ pipeline{
 									// {
 									 // parameters 
 										{
-										 input	choice(
+										 input ''' choice(
 													choices: ['Deploy to Dev' , 'Deploy to Test'],
 													description: 'Where to Deploy.?',
-													name: 'REQUESTED_ACTION')
+													name: 'REQUESTED_ACTION') 
+										       '''
 										}
 									// }
 							}				
