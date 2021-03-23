@@ -29,7 +29,7 @@ pipeline{
 						stage('Deployment Selection')
 							{
 							 steps
-									{
+									// {
 									 // parameters 
 										{
 											choice(
@@ -37,7 +37,7 @@ pipeline{
 													description: 'Where to Deploy.?',
 													name: 'REQUESTED_ACTION')
 										}
-									}
+									// }
 							}				
 						stage('Deploy to Dev')
 							{
