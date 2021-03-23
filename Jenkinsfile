@@ -18,7 +18,7 @@ pipeline{
 									 git branch: 'main', url: 'https://github.com/prashanth-konakala-bluepal/HelloWorld.git'
 									}
 							}
-						 stage("Maven Build")
+						stage("Maven Build")
 							 {
 							  steps
 									{
@@ -28,13 +28,16 @@ pipeline{
 							 } 
 						stage('Deployment Selection')
 							{
-							 parameters 
-								{
-									choice(
-											choices: ['Deploy to Dev' , 'Deploy to Test'],
-											description: 'Where to Deploy.?',
-											name: 'REQUESTED_ACTION')
-								}							
+							 steps
+									{
+									 parameters 
+										{
+											choice(
+													choices: ['Deploy to Dev' , 'Deploy to Test'],
+													description: 'Where to Deploy.?',
+													name: 'REQUESTED_ACTION')
+										}
+									}
 							}				
 						stage('Deploy to Dev')
 							{
