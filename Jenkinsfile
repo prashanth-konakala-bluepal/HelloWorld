@@ -1,4 +1,5 @@
-pipeline{		 agent any
+pipeline{		 
+		 agent any
 		 
 		 environment
 			 {
@@ -28,8 +29,9 @@ pipeline{		 agent any
 						stage('Deployment Selection')
 							{
 							 steps
-									input 
-											{
+									{
+									 input 
+												{
 												 parameters 
 													{
 													 choice(
@@ -38,7 +40,8 @@ pipeline{		 agent any
 															name: 'REQUESTED_ACTION')
 													}
 												}
-											}				
+									}
+							}				
 						stage('Deploy to Dev')
 							{
 							 steps
