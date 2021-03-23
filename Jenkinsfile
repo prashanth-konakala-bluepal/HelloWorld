@@ -32,9 +32,9 @@ pipeline{
 							{
 							 choice 
 								(
-								 name: ('Requested_Action'),
-								 choices: ['Deploy to Dev', 'Deploy to Test'],
-								 description: 'Where to Deploy.?'
+								 name ('Requested_Action'),
+								 choices ['Deploy to Dev', 'Deploy to Test'],
+								 description 'Where to Deploy.?'
 								)
 							}
 					}
