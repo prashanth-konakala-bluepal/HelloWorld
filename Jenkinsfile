@@ -14,53 +14,69 @@ pipeline{
 			    stage("Git Checkout")
 					{
 					 steps
-						  {
-						   git branch: 'main', url: 'https://github.com/prashanth-konakala-bluepal/HelloWorld.git'
-						  }
+							{
+						     git branch: 'main', url: 'https://github.com/prashanth-konakala-bluepal/HelloWorld.git'
+						    }
 					}
 			     stage("Maven Build")
 				 {
 				  steps
-					  {
-					   sh "mvn clean package"
-					   sh "mv /var/lib/jenkins/workspace/sample_pipeline/webapp/target/*.war /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war"
-					  }
-				 }
-				 stage("Deploy-dev")
-				 {
-				  steps
 						{
-						 sshagent(['Tomcat'])
+						 sh "mvn clean package"
+						 sh "mv /var/lib/jenkins/workspace/sample_pipeline/webapp/target/*.war /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war"
+						}
+				 } 
+				stage('Select Deployment')
+					{
+					 parameters
 							{
-							 sh """
-							 
-								scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@172.31.9.46:/opt/tomcat/webapps/
-								
-								ssh ubuntu@172.31.9.46 /opt/tomcat/bin/shutdown.sh
-								
-								ssh ubuntu@172.31.9.46 /opt/tomcat/bin/startup.sh
-								
-							 """
+							 choice 
+								(
+								 name: 'Requested_Action',
+								 choices: ['Deploy to Dev', 'Deploy to Test'],
+								 description: 'Where to Deploy.?'
+								)
 							}
-						}
-				 }
-				 stage("Deploy-test")
-				 {
-				  steps
+					}
+				stage('Deploy to Dev')
+					when 
 						{
-						 sshagent(['Tomcat-2'])
-						 {
-						  sh """
-						  
-							scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@18.220.90.224:/opt/tomcat/webapps/
-							
-							ssh ubuntu@18.220.90.224 /opt/tomcat/bin/shutdown.sh
-							
-							ssh ubuntu@18.220.90.224 /opt/tomcat/bin/startup.sh
-						  
-						  """
-						 }
+						 choice: 'Deploy to Dev'
 						}
-				 }
+						 steps
+								{
+								 sshagent(['Tomcat-1'])
+										{
+										 sh """
+										
+											scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@3.143.17.169:/opt/tomcat/webapps/
+											
+											ssh ubuntu@3.143.17.169 /opt/tomcat/bin/shutdown.sh
+											
+											ssh ubuntu@3.143.17.169 /opt/tomcat/bin/startup.sh
+											
+										"""
+										}
+								}
+				stage('Deploy to Test')
+					when 
+						{
+						 choice 'Deploy to Test'
+						}
+						 steps
+								{
+								 sshagent(['Tomcat-2'])
+										{
+										 sh """
+										
+											scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@18.221.59.213:/opt/tomcat/webapps/
+											
+											ssh ubuntu@18.221.59.213 /opt/tomcat/bin/shutdown.sh
+											
+											ssh ubuntu@18.221.59.213 /opt/tomcat/bin/startup.sh
+											
+										"""
+										}
+								}
 			   }
 		}
