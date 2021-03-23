@@ -37,7 +37,7 @@ pipeline{
 							{
 							 steps
 									{
-									 sshagent(['Tomcat-1'])
+									 sshagent(['Tomcat'])
 											{
 											 sh """
 											
