@@ -9,13 +9,6 @@ pipeline{
 			 {
 			  PATH = "/opt/jdk-11.0.10/bin:$PATH"
 			 }
-		 parameters 
-			{
-				choice(
-						choices: ['Deploy to Dev' , 'Deploy to Test'],
-						description: 'Where to Deploy.?',
-						name: 'REQUESTED_ACTION')
-			}
 		 stages
 				{
 						stage("Git Checkout")
@@ -33,6 +26,16 @@ pipeline{
 									 sh "mv /var/lib/jenkins/workspace/sample_pipeline/webapp/target/*.war /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war"
 									}
 							 } 
+						stage('Deployment Selection')
+							{
+							 parameters 
+								{
+									choice(
+											choices: ['Deploy to Dev' , 'Deploy to Test'],
+											description: 'Where to Deploy.?',
+											name: 'REQUESTED_ACTION')
+								}							
+							}				
 						stage('Deploy to Dev')
 							{
 							 steps
