@@ -39,8 +39,7 @@ pipeline{
 									}
 							}				
 						stage('Deploy to Dev')
-							when
-								{
+							when{
 								 expression { env.YourTag = 'Deploy to Dev' }
 								}
 									{
@@ -61,8 +60,7 @@ pipeline{
 											}
 									}
 						stage('Deploy to Test')
-							when
-								{
+							when{
 								 expression { env.YourTag = 'Deploy to Test' }
 								}
 									{
