@@ -41,7 +41,7 @@ pipeline{
 						stage('Deploy to Dev')
 							when
 								{
-								 expression {${env.YourTag} = 'Deploy to Dev'}
+								 ${env.YourTag} = 'Deploy to Dev'
 								}
 									{
 									 steps
@@ -63,7 +63,7 @@ pipeline{
 						stage('Deploy to Test')
 							when
 								{
-								 expression {${env.YourTag} = 'Deploy to Test'}
+								 ${env.YourTag} = 'Deploy to Test'
 								}
 									{
 									 steps
