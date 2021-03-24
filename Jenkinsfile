@@ -46,15 +46,15 @@ pipeline{
 										}
 									 steps
 											{
-											 sshagent(['Tomcat'])
+											 sshagent(['Tomcat_server-1'])
 													{
 													 sh """
 													
-														scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@3.143.17.169:/opt/tomcat/webapps/
+														scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@3.133.110.94:/opt/tomcat/webapps/
 														
-														ssh ubuntu@3.143.17.169 /opt/tomcat/bin/shutdown.sh
+														ssh ubuntu@3.133.110.94 /opt/tomcat/bin/shutdown.sh
 														
-														ssh ubuntu@3.143.17.169 /opt/tomcat/bin/startup.sh
+														ssh ubuntu@3.133.110.94 /opt/tomcat/bin/startup.sh
 														
 													"""
 													}
@@ -68,15 +68,15 @@ pipeline{
 										}
 										 steps
 												{
-												 sshagent(['Tomcat-2'])
+												 sshagent(['Tomcat_server-2'])
 														{
 														 sh """
 													
-															scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@18.221.59.213:/opt/tomcat/webapps/
+															scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/sample_pipeline/webapp/target/simpleweb.war ubuntu@52.15.158.6:/opt/tomcat/webapps/
 																
-															ssh ubuntu@18.221.59.213 /opt/tomcat/bin/shutdown.sh
+															ssh ubuntu@52.15.158.6 /opt/tomcat/bin/shutdown.sh
 																
-															ssh ubuntu@18.221.59.213 /opt/tomcat/bin/startup.sh
+															ssh ubuntu@52.15.158.6 /opt/tomcat/bin/startup.sh
 																
 														"""
 														}
